@@ -26,7 +26,6 @@ class Game
 		# display images
 		@background = @add.tileSprite 0, 0, Axe.GAME_WIDTH, Axe.GAME_HEIGHT, 'background'
 		@floor = @add.tileSprite 0, Axe.GAME_HEIGHT - 80, Axe.GAME_WIDTH, 83, 'floor'
-		@add.sprite 10, 5, 'score-bg'
 
 		# floor physics
 		@physics.enable @floor, Phaser.Physics.ARCADE
@@ -67,7 +66,7 @@ class Game
 		@spawnTimer = 0
 		@spawnInterval = 3000
 		@mobGroup = @add.group()
-		@scoreText = @add.text 120, 20, "0", @fontStyle
+		@scoreText = @add.text 20, 10, "Score: 0", @fontStyle
 		@score = 0
 
 		@difficultyTimer = @time.create false
@@ -96,12 +95,12 @@ class Game
 
 		if @axe.swinging
 			if @axe.facing == 'left'
-				@axe.angle -= 3
+				@axe.angle -= 2
 				if @axe.angle <= -80
 					@axe.swinging = false
 					@axe.angle = -10
 			else
-				@axe.angle += 3
+				@axe.angle += 2
 				if @axe.angle >= 80
 					@axe.swinging = false
 					@axe.angle = 10

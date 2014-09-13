@@ -18,7 +18,6 @@ class Preloader
 		@load.image 'floor', 'images/floor.png'
 		@load.image 'title', 'images/title.png'
 		@load.image 'game-over', 'images/gameover.png'
-		@load.image 'score-bg', 'images/score-bg.png'
 		@load.image 'button-pause', 'images/button-pause.png'
 
 		@load.image 'player', 'images/player.png'

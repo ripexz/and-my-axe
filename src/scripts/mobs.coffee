@@ -19,5 +19,7 @@ class MobManager
 
 	killEnemy: (enemy, axe) ->
 		enemy.kill()
+		@score += 10
+		@scoreText.text = "Score: " + @score
 
 module.exports = MobManager
