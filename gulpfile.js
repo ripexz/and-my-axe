@@ -58,17 +58,8 @@ gulp.task('watch', ['compile'], function(){
 	gulp.watch([paths.src.styles], ['styles']);
 });
 
-gulp.task('lint', function(){
-	// Generate a nice report of all lint errors
-	gulp.src(paths.src.appScripts)
-		.pipe(coffeelint(paths.other.coffeeRulesFile))
-		.pipe(coffeelint.reporter('default'))
-});
 
 
-/* ---------------------------------------------------------------------
- * Gulp tasks; tasks for the browser-side of the app
- * --------------------------------------------------------------------- */
 
 gulp.task('templates', function() {
 	gulp.src(paths.src.templates)
