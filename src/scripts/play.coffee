@@ -46,12 +46,19 @@ class Game
 		@physics.enable @player, Phaser.Physics.ARCADE
 		@player.immovable = true
 		
-		# axe
+		# create axe
 		@axe = @add.sprite 0, 0, 'axe'
 		@axe.anchor.setTo 0, 1
 		@axe.position.x = @player.position.x + 20
 		@axe.position.y = @player.position.y - 70
 		@axe.angle = 10
+		@axe.facing = 'right'
+		@axe.canSwing = true
+
+		# axe phyics
+		@physics.enable @axe, Phaser.Physics.ARCADE
+		@axe.body.allowGravity = false
+		@axe.body.immovable = true
 
 		# set fonts
 		@fontStyle = { font: "40px Arial", fill: "#FFCC00", stroke: "#333", strokeThickness: 5, align: "center" }
@@ -80,20 +87,43 @@ class Game
 	update: () ->
 		@physics.arcade.collide @player, @floor
 
+		if @input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) and @axe.canSwing and not @axe.swinging
+			@axe.swinging = true
+			@axe.canSwing = false
+			setTimeout () =>
+				@axe.canSwing = true
+			, 1000
+
+		if @axe.swinging
+			if @axe.facing == 'left'
+				@axe.angle -= 3
+				if @axe.angle <= -80
+					@axe.swinging = false
+					@axe.angle = -10
+			else
+				@axe.angle += 3
+				if @axe.angle >= 80
+					@axe.swinging = false
+					@axe.angle = 10
+
 		if @cursors.left.isDown
 			@player.scale.x = -1
 			@background.tilePosition.x += 3
 			@floor.tilePosition.x += 3
 			@axe.position.x = @player.position.x - 20
-			@axe.angle = -10
+			@axe.swinging = false if @axe.facing == 'right'
+			@axe.angle = -10 unless @axe.swinging
 			@axe.scale.x = -1
+			@axe.facing = 'left'
 		if @cursors.right.isDown
 			@player.scale.x = 1
 			@background.tilePosition.x -= 3
 			@floor.tilePosition.x -= 3
 			@axe.position.x = @player.position.x + 20
-			@axe.angle = 10
+			@axe.swinging = false if @axe.facing == 'left'
+			@axe.angle = 10 unless @axe.swinging
 			@axe.scale.x = 1
+			@axe.facing = 'right'
 
 		@time.elapsed
 
@@ -103,8 +133,9 @@ class Game
 			@mobs.spawnEnemy this
 
 		@mobGroup.forEach (enemy) =>
-			@physics.arcade.collide enemy, @player, @gameOver, null, this
 			@physics.arcade.collide enemy, @floor
+
+			@physics.arcade.collide enemy, @axe, @mobs.killEnemy, null, this if @axe.swinging
 
 			speed = 60
 			if enemy.position.x >= Axe.GAME_WIDTH / 2
@@ -116,6 +147,7 @@ class Game
 				speed = 120 if @cursors.left.isDown
 				speed = 0 if @cursors.right.isDown
 
+			@physics.arcade.collide enemy, @player, @gameOver, null, this
 			@physics.arcade.moveToObject enemy, @player, speed
 
 	gameOver: () ->

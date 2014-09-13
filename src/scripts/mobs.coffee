@@ -17,4 +17,7 @@ class MobManager
 		# add to group
 		game.mobGroup.add mob
 
+	killEnemy: (enemy, axe) ->
+		enemy.kill()
+
 module.exports = MobManager
