@@ -109,6 +109,5 @@ gulp.task('styles', function(){
 gulp.task('third-party', function(){
 	gulp.src(paths.src.dependencies)
 		.pipe($.concat('libs.js'))
-		.pipe($.uglify())
 		.pipe(gulp.dest(paths.build.browserScriptsRoot));
 });
