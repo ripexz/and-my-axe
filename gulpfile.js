@@ -103,6 +103,7 @@ gulp.task('styles', function(){
 		.pipe($.less())
 		.pipe($.minifyCss())
 		.pipe($.autoprefixer('last 2 versions'))
+		.pipe($.rename('main.css'))
 		.pipe(gulp.dest(paths.build.cssRoot));
 });
 
