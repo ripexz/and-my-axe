@@ -51,10 +51,9 @@ gulp.task('clean', function(){
 
 gulp.task('watch', ['compile'], function(){
 	gulp.watch([paths.src.dependencies], ['third-party']);
-	gulp.watch([paths.src.php], ['php']);
 	gulp.watch([paths.src.fonts], ['fonts']);
 	gulp.watch([paths.src.images], ['images']);
-	gulp.watch([paths.src.appScripts, paths.src.compTemplates, paths.src.compScripts], ['scripts']);
+	gulp.watch([paths.src.appScripts], ['scripts']);
 	gulp.watch([paths.src.styles], ['styles']);
 });
 

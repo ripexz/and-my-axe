@@ -5,25 +5,26 @@ class Preloader
 		Axe.GAME_HEIGHT = 640
 
 	create: () ->
-		this.state.start 'menu'
+		@state.start 'menu'
 
 	preload: () ->
-		this.stage.backgroundColor = '#B4D9E7'
+		@stage.backgroundColor = '#B4D9E7'
 
-		this.preloadBar = this.add.sprite((Axe.GAME_WIDTH-311)/2, (Axe.GAME_HEIGHT-27)/2, 'preloaderBar')
-		this.load.setPreloadSprite this.preloadBar
+		@preloadBar = @add.sprite((Axe.GAME_WIDTH-311)/2, (Axe.GAME_HEIGHT-27)/2, 'preloaderBar')
+		@load.setPreloadSprite @preloadBar
 		
 		# load images
-		this.load.image 'background', 'images/background.png'
-		this.load.image 'floor', 'images/floor.png'
-		this.load.image 'monster-cover', 'images/monster-cover.png'
-		this.load.image 'title', 'images/title.png'
-		this.load.image 'game-over', 'images/gameover.png'
-		this.load.image 'score-bg', 'images/score-bg.png'
-		this.load.image 'button-pause', 'images/button-pause.png'
+		@load.image 'background', 'images/background.png'
+		@load.image 'floor', 'images/floor.png'
+		@load.image 'monster-cover', 'images/monster-cover.png'
+		@load.image 'title', 'images/title.png'
+		@load.image 'game-over', 'images/gameover.png'
+		@load.image 'score-bg', 'images/score-bg.png'
+		@load.image 'button-pause', 'images/button-pause.png'
 
 		# load spritesheets
-		this.load.spritesheet('candy', 'images/candy.png', 82, 98);
-		this.load.spritesheet('monster-idle', 'images/monster-idle.png', 103, 131);
+		@load.spritesheet('candy', 'images/candy.png', 82, 98);
+		@load.spritesheet('monster-idle', 'images/monster-idle.png', 103, 131);
+		@load.spritesheet('button-start', 'images/button-start.png', 401, 143);
 
 module.exports = Preloader
