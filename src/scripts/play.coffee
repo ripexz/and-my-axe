@@ -14,8 +14,6 @@ class Game
 		@score = 0
 
 	create: () ->
-		console.log 'GAME STARTED'
-
 		# initialise helper classes
 		@mobs = new MobManager()
 

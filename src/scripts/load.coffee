@@ -25,7 +25,6 @@ class Preloader
 		@load.image 'axe', 'images/axe.png'
 
 		# load spritesheets
-		@load.spritesheet 'candy', 'images/candy.png', 82, 98
 		@load.spritesheet 'button-start', 'images/button-start.png', 401, 143
 
 module.exports = Preloader
