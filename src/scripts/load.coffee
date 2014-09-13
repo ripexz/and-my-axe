@@ -23,8 +23,8 @@ class Preloader
 		@load.image 'button-pause', 'images/button-pause.png'
 
 		# load spritesheets
-		@load.spritesheet('candy', 'images/candy.png', 82, 98);
-		@load.spritesheet('monster-idle', 'images/monster-idle.png', 103, 131);
-		@load.spritesheet('button-start', 'images/button-start.png', 401, 143);
+		@load.spritesheet 'candy', 'images/candy.png', 82, 98
+		@load.spritesheet 'monster-idle', 'images/monster-idle.png', 103, 131
+		@load.spritesheet 'button-start', 'images/button-start.png', 401, 143
 
 module.exports = Preloader
