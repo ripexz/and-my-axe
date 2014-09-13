@@ -9,9 +9,7 @@ class Game
 
 		@fontStyle = null
 		@scoreText = null
-
 		@score = 0
-		@health = 0
 
 	create: () ->
 		console.log 'GAME STARTED'
@@ -54,7 +52,6 @@ class Game
 		@mobGroup = @add.group()
 		@scoreText = @add.text 120, 20, "0", @fontStyle
 		@score = 0
-		@health = 100
 
 		@cursors = @input.keyboard.createCursorKeys()
 		@mobs.spawnEnemy this
@@ -85,15 +82,23 @@ class Game
 			@mobs.spawnEnemy this
 
 		@mobGroup.forEach (enemy) =>
+			@physics.arcade.collide enemy, @player, @gameOver, null, this
 			@physics.arcade.collide enemy, @floor
-			if @cursors.left.isDown
-				@physics.arcade.moveToObject enemy, @player, 60
-			if @cursors.right.isDown
-				@physics.arcade.moveToObject enemy, @player, 60
 
-		# game over
-		if @health <= 0
-			@add.sprite((Axe.GAME_WIDTH - 594)/2, (Axe.GAME_HEIGHT - 271)/2, 'game-over')
-			@game.paused = true
+			speed = 60
+			if enemy.position.x >= Axe.GAME_WIDTH / 2
+				enemy.scale.x = -1
+				speed = 0 if @cursors.left.isDown
+				speed = 120 if @cursors.right.isDown
+			else
+				enemy.scale.x = 1
+				speed = 120 if @cursors.left.isDown
+				speed = 0 if @cursors.right.isDown
+
+			@physics.arcade.moveToObject enemy, @player, speed
+
+	gameOver: () ->
+		@add.sprite((Axe.GAME_WIDTH - 594)/2, (Axe.GAME_HEIGHT - 271)/2, 'game-over')
+		@game.paused = true
 
 module.exports = Game
