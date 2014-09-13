@@ -153,7 +153,7 @@ class Game
 		setTimeout () =>
 			@game.paused = false
 			@state.start 'menu'
-		, 3000
+		, 5000
 
 	increaseDifficulty: () ->
 		if @spawnInterval > 0
