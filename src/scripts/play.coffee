@@ -84,10 +84,16 @@ class Game
 			@player.scale.x = -1
 			@background.tilePosition.x += 3
 			@floor.tilePosition.x += 3
+			@axe.position.x = @player.position.x - 20
+			@axe.angle = -10
+			@axe.scale.x = -1
 		if @cursors.right.isDown
 			@player.scale.x = 1
 			@background.tilePosition.x -= 3
 			@floor.tilePosition.x -= 3
+			@axe.position.x = @player.position.x + 20
+			@axe.angle = 10
+			@axe.scale.x = 1
 
 		@time.elapsed
 
