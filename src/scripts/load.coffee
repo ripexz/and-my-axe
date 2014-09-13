@@ -8,7 +8,7 @@ class Preloader
 		@state.start 'menu'
 
 	preload: () ->
-		@stage.backgroundColor = '#B4D9E7'
+		@stage.backgroundColor = '#444444'
 
 		@preloadBar = @add.sprite((Axe.GAME_WIDTH-311)/2, (Axe.GAME_HEIGHT-27)/2, 'preloaderBar')
 		@load.setPreloadSprite @preloadBar
