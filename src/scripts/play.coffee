@@ -34,7 +34,7 @@ class Game
 		@add.button Axe.GAME_WIDTH-96-10, 5, 'button-pause', @managePause, this
 
 		# create the player and animations
-		@player = @add.sprite 5, 760, 'monster-idle'
+		@player = @add.sprite 5, 5, 'monster-idle'
 		@player.animations.add 'idle', [0,1,2,3,4,5,6,7,8,9,10,11,12], 10, true
 		@player.animations.play 'idle'
 
@@ -53,10 +53,10 @@ class Game
 
 	managePause: () ->
 		@game.paused = true
-		pausedText = @add.text 100, 250, "Game paused.\nClick anywhere to continue.", @fontStyle
+		@pausedText = @add.text 100, 250, "Game paused.\nClick anywhere to continue.", @fontStyle
 		self = @
 		@input.onDown.add () ->
-			pausedText.destroy()
+			self.pausedText.destroy()
 			self.game.paused = false
 
 	update: () ->
