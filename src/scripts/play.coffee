@@ -93,12 +93,12 @@ class Game
 
 		if @axe.swinging
 			if @axe.facing == 'left'
-				@axe.angle -= 2
+				@axe.angle -= 4
 				if @axe.angle <= -80
 					@axe.swinging = false
 					@axe.angle = -10
 			else
-				@axe.angle += 2
+				@axe.angle += 4
 				if @axe.angle >= 80
 					@axe.swinging = false
 					@axe.angle = 10
