@@ -150,6 +150,10 @@ class Game
 	gameOver: () ->
 		@add.sprite((Axe.GAME_WIDTH - 594)/2, (Axe.GAME_HEIGHT - 271)/2, 'game-over')
 		@game.paused = true
+		setTimeout () =>
+			@game.paused = false
+			@state.start 'menu'
+		, 3000
 
 	increaseDifficulty: () ->
 		if @spawnInterval > 0
