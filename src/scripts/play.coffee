@@ -1,13 +1,50 @@
+#MobManager = require './mobs'
+#ItemManager = require './items'
+
 class Game
 
 	constructor: (game) ->
 		@player = null
 		@spawnTimer = null
 
+		@fontStyle = null
+		@scoreText = null
+
 		@score = 0
-		@health = 100
+		@health = 0
 
 	create: () ->
 		console.log 'GAME STARTED'
+
+		# initialise helper classes
+		@items = new ItemManager()
+		@mobs = new MobManager()
+
+		# physics and gravity
+		@physics.startSystem(Phaser.Physics.ARCADE);
+		@physics.arcade.gravity.y = 200;
+
+		# display images
+		@add.sprite(0, 0, 'background');
+		@add.sprite(-30, Axe.GAME_HEIGHT-160, 'floor');
+		@add.sprite(10, 5, 'score-bg');
+
+		# add pause button
+		@add.button(Axe.GAME_WIDTH-96-10, 5, 'button-pause', @managePause, this);
+
+		# create the player and animations
+		@player = @add.sprite(5, 760, 'monster-idle');
+		@player.animations.add('idle', [0,1,2,3,4,5,6,7,8,9,10,11,12], 10, true);
+		@player.animations.play('idle');
+
+		# set fonts
+		@fontStyle = { font: "40px Arial", fill: "#FFCC00", stroke: "#333", strokeThickness: 5, align: "center" };
+
+		# initialise variables
+		@spawnTimer = 0;
+		@scoreText = @add.text(120, 20, "0", @fontStyle);
+		@score = 0
+		@health = 100
+		#@mobs.spawnEnemy this
 
 module.exports = Game
