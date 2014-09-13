@@ -18,8 +18,8 @@ class Game
 		console.log 'GAME STARTED'
 
 		# initialise helper classes
-		@items = new ItemManager()
-		@mobs = new MobManager()
+		#@items = new ItemManager()
+		#@mobs = new MobManager()
 
 		# physics and gravity
 		@physics.startSystem Phaser.Physics.ARCADE
@@ -52,10 +52,10 @@ class Game
 	managePause: () ->
 		@game.paused = true
 		pausedText = @add.text 100, 250, "Game paused.\nClick anywhere to continue.", @fontStyle
-		@input.onDown.add(() ->
+		self = @
+		@input.onDown.add () ->
 			pausedText.destroy()
-			@game.paused = false
-		, this
+			self.game.paused = false
 
 	update: () ->
 		@spawnTimer += @time.elapsed
@@ -70,7 +70,5 @@ class Game
 		if @health <= 0
 			@add.sprite((Candy.GAME_WIDTH-594)/2, (Candy.GAME_HEIGHT-271)/2, 'game-over')
 			@game.paused = true
-		}
-	}
 
 module.exports = Game
