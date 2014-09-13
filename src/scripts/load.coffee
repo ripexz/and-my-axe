@@ -23,6 +23,7 @@ class Preloader
 
 		@load.image 'player', 'images/player.png'
 		@load.image 'enemy', 'images/enemy.png'
+		@load.image 'axe', 'images/axe.png'
 
 		# load spritesheets
 		@load.spritesheet 'candy', 'images/candy.png', 82, 98

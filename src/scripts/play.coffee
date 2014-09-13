@@ -45,6 +45,13 @@ class Game
 		# player physics
 		@physics.enable @player, Phaser.Physics.ARCADE
 		@player.immovable = true
+		
+		# axe
+		@axe = @add.sprite 0, 0, 'axe'
+		@axe.anchor.setTo 0, 1
+		@axe.position.x = @player.position.x + 20
+		@axe.position.y = @player.position.y - 70
+		@axe.angle = 10
 
 		# set fonts
 		@fontStyle = { font: "40px Arial", fill: "#FFCC00", stroke: "#333", strokeThickness: 5, align: "center" }
