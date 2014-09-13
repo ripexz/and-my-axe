@@ -4,8 +4,10 @@ class Game
 
 	constructor: (game) ->
 		@player = null
-		@spawnTimer = null
 		@mobGroup = null
+
+		@spawnTimer = null
+		@spawnInterval = null
 
 		@fontStyle = null
 		@scoreText = null
@@ -49,9 +51,13 @@ class Game
 
 		# initialise variables
 		@spawnTimer = 0
+		@spawnInterval = 3000
 		@mobGroup = @add.group()
 		@scoreText = @add.text 120, 20, "0", @fontStyle
 		@score = 0
+
+		@difficultyTimer = @time.create false
+		@difficultyTimer.loop 5000, @increaseDifficulty, this
 
 		@cursors = @input.keyboard.createCursorKeys()
 		@mobs.spawnEnemy this
@@ -76,8 +82,10 @@ class Game
 			@background.tilePosition.x -= 3
 			@floor.tilePosition.x -= 3
 
+		@time.elapsed
+
 		@spawnTimer += @time.elapsed
-		if @spawnTimer > 1000
+		if @spawnTimer > @spawnInterval
 			@spawnTimer = 0
 			@mobs.spawnEnemy this
 
@@ -100,5 +108,11 @@ class Game
 	gameOver: () ->
 		@add.sprite((Axe.GAME_WIDTH - 594)/2, (Axe.GAME_HEIGHT - 271)/2, 'game-over')
 		@game.paused = true
+
+	increaseDifficulty: () ->
+		if @spawnInterval > 0
+			@spawnInterval -= 50
+		else
+			@spawnInterval = 0
 
 module.exports = Game
