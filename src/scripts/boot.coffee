@@ -14,4 +14,7 @@ class Boot
 		# start the Preloader state
 		@state.start 'load'
 
+	preload: () ->
+		@load.image 'preloaderBar', 'images/loading-bar.png'
+
 module.exports = Boot

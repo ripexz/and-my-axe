@@ -38,6 +38,8 @@ class Game
 		@player.animations.add 'idle', [0,1,2,3,4,5,6,7,8,9,10,11,12], 10, true
 		@player.animations.play 'idle'
 
+		console.log @player
+
 		# set fonts
 		@fontStyle = { font: "40px Arial", fill: "#FFCC00", stroke: "#333", strokeThickness: 5, align: "center" }
 
