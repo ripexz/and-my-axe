@@ -34,9 +34,7 @@ class Game
 		@add.button Axe.GAME_WIDTH - 106, 5, 'button-pause', @managePause, this
 
 		# create the player and animations
-		@player = @add.sprite (Axe.GAME_WIDTH / 2), Axe.GAME_HEIGHT - 83, 'player'
-		#@player.animations.add 'idle', [0,1,2,3,4,5,6,7,8,9,10,11,12], 10, true
-		#@player.animations.play 'idle'
+		@player = @add.sprite 80, Axe.GAME_HEIGHT - 83, 'player'
 		@player.anchor.setTo 0.5, 1
 
 		# player physics
@@ -93,19 +91,19 @@ class Game
 
 		if @axe.swinging
 			if @axe.facing == 'left'
-				@axe.angle -= 4
+				@axe.angle -= 3
 				if @axe.angle <= -80
 					@axe.swinging = false
 					@axe.angle = -10
 			else
-				@axe.angle += 4
+				@axe.angle += 3
 				if @axe.angle >= 80
 					@axe.swinging = false
 					@axe.angle = 10
 
 		if @cursors.left.isDown
 			@player.scale.x = -1
-			@background.tilePosition.x += 3
+			@background.tilePosition.x += 1
 			@floor.tilePosition.x += 3
 			@axe.position.x = @player.position.x - 20
 			@axe.swinging = false if @axe.facing == 'right'
@@ -114,7 +112,7 @@ class Game
 			@axe.facing = 'left'
 		if @cursors.right.isDown
 			@player.scale.x = 1
-			@background.tilePosition.x -= 3
+			@background.tilePosition.x -= 1
 			@floor.tilePosition.x -= 3
 			@axe.position.x = @player.position.x + 20
 			@axe.swinging = false if @axe.facing == 'left'
@@ -135,14 +133,8 @@ class Game
 			@physics.arcade.collide enemy, @axe, @mobs.killEnemy, null, this if @axe.swinging
 
 			speed = 60
-			if enemy.position.x >= Axe.GAME_WIDTH / 2
-				enemy.scale.x = -1
-				speed = 0 if @cursors.left.isDown
-				speed = 120 if @cursors.right.isDown
-			else
-				enemy.scale.x = 1
-				speed = 120 if @cursors.left.isDown
-				speed = 0 if @cursors.right.isDown
+			speed = 0 if @cursors.left.isDown
+			speed = 120 if @cursors.right.isDown
 
 			@physics.arcade.collide enemy, @player, @gameOver, null, this
 			@physics.arcade.moveToObject enemy, @player, speed
